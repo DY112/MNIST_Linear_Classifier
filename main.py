@@ -17,7 +17,6 @@ b2 = tf.Variable(tf.random_normal([10]))
 y = tf.matmul(h1,W2)+b2
 
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=y_,logits=y))
-avc = tf.Variable(0,trainable=False,name='avc')
 optimizer = tf.train.AdamOptimizer(0.01).minimize(cost, global_step=global_step)
 
 sess = tf.Session()
