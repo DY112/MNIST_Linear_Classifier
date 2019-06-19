@@ -27,6 +27,8 @@ tf.summary.scalar('cost',cost)
 merged = tf.summary.merge_all()
 writer = tf.summary.FileWriter('./logs',sess.graph)
 
+saver = tf.train.Saver(tf.global_variables())
+
 for epoch in range(100):
     avc = 0.
     batch = 100
@@ -37,4 +39,7 @@ for epoch in range(100):
 
         avc += c / total_batch
         writer.add_summary(summary,global_step=sess.run(global_step))
+
+    if epoch % 100 == 99:
+        saver.save(sess,'./save/model',sess.run(global_step))
     print("Epoch:", '%04d' % (epoch + 1), "cost=", "{:.9f}".format(avc))
